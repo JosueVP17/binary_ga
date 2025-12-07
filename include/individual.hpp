@@ -30,12 +30,26 @@ class Individual {
 
         // GENETIC MANIPULATION
         /**
+         * @brief Crossover this individual with other based on a certain probability.
+         * @param other Other individual in the population.
+         * @param probMutation Probability of crossover in the range [0, 1].
+         * @return New individual.
+         */
+        void crossover(Individual& other, double probCross);
+
+        /**
          * @brief Mutates the individual based on a certain probability.
          * @param probMutation Probability of bit mutation in the range [0, 1].
          */
         void mutate(double probMutation);
 
         // GETTERS
+        /**
+         * @brief Decodes the binary string in real values from its parameter ranges.
+         * @return A vector<double> with the values.
+         */
+        std::vector<double> decodeParameters();
+
         /**
          * @brief Gets the fitness value of the individual.
          * @return Actual fitness value.
