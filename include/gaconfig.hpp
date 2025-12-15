@@ -15,7 +15,7 @@ class GAConfig {
 
         // GETTERS
         
-        double getGeneLength();
+        size_t getGeneLength();
         size_t getNumParameters();
         std::vector<size_t> getParameterLengths();
         std::vector<std::pair<double, double>> getParameterRanges();

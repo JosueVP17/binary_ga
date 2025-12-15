@@ -35,12 +35,12 @@ GAConfig::Builder& GAConfig::Builder::setParameterLengths(std::vector<size_t> le
     }
 
     if(this->geneLength == 0) {
-        throw std::invalid_argument("You must set a genotype length.");
+        throw std::invalid_argument("You must set a genotype length before setting parameter lengths.");
     }
 
     size_t totalLength = 0;
-    for(size_t i = 0; i < this->geneLength; i++) {
-        totalLength += parameterLengths[i];
+    for(size_t i = 0; i < lengths.size(); i++) {
+        totalLength += lengths[i];
     }
 
     if(totalLength != this->geneLength) {
@@ -57,7 +57,11 @@ GAConfig::Builder& GAConfig::Builder::setParameterRanges(std::vector<std::pair<d
     }
 
     if(this->n_parameters == 0) {
-        throw std::invalid_argument("You must set a number of parameters.");
+        throw std::invalid_argument("You must set a number of parameters before setting parameter ranges.");
+    }
+
+    if(ranges.size() != this->n_parameters) {
+        throw std::invalid_argument("Number of parameter ranges must match with number of parameters.");
     }
 
     for(size_t i = 0; i < this->n_parameters; i++) {
@@ -116,6 +120,7 @@ GAConfig GAConfig::Builder::build() {
     config.parameterLengths = this->parameterLengths;
     config.parameterRanges = this->parameterRanges;
     config.probCross = this->probCross;
+    config.probMutation = this->probMutation;
     config.populationSize = this->populationSize;
     config.numGenerations = this->numGenerations;
 
@@ -126,7 +131,7 @@ GAConfig GAConfig::Builder::build() {
 // GETTERS
 // =============================================
 
-double GAConfig::getGeneLength() {
+size_t GAConfig::getGeneLength() {
     return this->geneLength;
 }
 
