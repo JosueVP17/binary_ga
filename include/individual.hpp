@@ -6,6 +6,7 @@
 #include <vector>
 #include <random>
 #include <stdexcept>
+#include "gaconfig.hpp"
 
 /**
  * @class Individual
@@ -26,7 +27,7 @@ class Individual {
          * @param parameterLengths Vector with the length in bits for each parameter.
          * @param parameterRanges Vector with the ranges [min, max] for each parameter.
          */
-        Individual(size_t geneLength, size_t n_parameters, std::vector<size_t> parameterLengths, std::vector<std::pair<double, double>> parameterRanges);
+        Individual(GAConfig& config);
 
         // GENETIC MANIPULATION
         /**

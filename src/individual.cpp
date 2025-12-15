@@ -10,24 +10,19 @@ Individual::Individual() {
     this->n_parameters = 0;
 }
 
-Individual::Individual(
-    size_t geneLength,
-    size_t n_parameters,
-    std::vector<size_t> parameterLengths,
-    std::vector<std::pair<double, double>> parameterRanges
-){
-    this->geneLength = geneLength;
-    this->n_parameters = n_parameters;
-    this->parameterLengths = parameterLengths;
-    this->parameterRanges = parameterRanges;
+Individual::Individual(GAConfig& config){
+    this->geneLength = config.getGeneLength();
+    this->n_parameters = config.getNumParameters();
+    this->parameterLengths = config.getParameterLengths();
+    this->parameterRanges = config.getParameterRanges();
     this->fitness = 0.0;
-    this->individual.resize(geneLength);
+    this->individual.resize(this->geneLength);
 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::bernoulli_distribution dist(0.5);
 
-    for(size_t i = 0; i < geneLength; i++) {
+    for(size_t i = 0; i < this->geneLength; i++) {
         this->individual[i] = dist(gen);
     }
 }
