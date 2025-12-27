@@ -5,6 +5,8 @@
 #include <vector>
 #include <stdexcept>
 
+class Fitness;
+
 class GAConfig {
     public:
         // CONSTRUCTOR CLASS FOR GACONFIG
@@ -23,6 +25,7 @@ class GAConfig {
         double getMutationRate();
         size_t getPopulationSize();
         size_t getNumGenerations();
+        Fitness* getFitnessFunc();
 
     private:
         // INDIVIDUAL
@@ -36,6 +39,7 @@ class GAConfig {
         // POPULATION
         size_t populationSize;                                      /// Quantity of individuals in a population.
         size_t numGenerations;                                      /// Number of generations of the algorithm.
+        Fitness* fitnessFunc;                                       /// Builder: Fitness function provided by user.
 };
 
 class GAConfig::Builder {
@@ -95,6 +99,11 @@ class GAConfig::Builder {
         Builder& setNumGenerations(size_t number);
 
         /**
+         * @brief Sets the fitness function provided by user.
+         */
+        Builder& setFitness(Fitness* function);
+
+        /**
          * @brief Returns a GAConfig object in order to initialize binary GA. Example: GAConfig config = Builder().build();
          */
         GAConfig build();
@@ -111,6 +120,9 @@ class GAConfig::Builder {
         // POPULATION
         size_t populationSize;                                      /// Builder: Quantity of individuals in a population.
         size_t numGenerations;                                      /// Builder: Number of generations of the algorithm.
+
+        // FITNESS
+        Fitness* fitnessFunc;                                       /// Builder: Fitness function provided by user.
 };
 
 #endif

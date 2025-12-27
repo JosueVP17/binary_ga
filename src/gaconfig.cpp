@@ -112,6 +112,15 @@ GAConfig::Builder& GAConfig::Builder::setNumGenerations(size_t number) {
     return *this;
 }
 
+GAConfig::Builder& GAConfig::Builder::setFitness(Fitness* function) {
+    if(function == nullptr) {
+        throw std::invalid_argument("Fitness function must be declared.");
+    }
+
+    this->fitnessFunc = function;
+    return *this;
+}
+
 GAConfig GAConfig::Builder::build() {
     GAConfig config;
 
@@ -123,6 +132,7 @@ GAConfig GAConfig::Builder::build() {
     config.probMutation = this->probMutation;
     config.populationSize = this->populationSize;
     config.numGenerations = this->numGenerations;
+    config.fitnessFunc = this->fitnessFunc;
 
     return config;
 }
@@ -161,4 +171,8 @@ size_t GAConfig::getPopulationSize() {
 
 size_t GAConfig::getNumGenerations() {
     return this->numGenerations;
+}
+
+Fitness* GAConfig::getFitnessFunc() {
+    return this->fitnessFunc;
 }
