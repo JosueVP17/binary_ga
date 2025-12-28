@@ -1,4 +1,5 @@
 #include "../include/individual.hpp"
+#include "../include/gaconfig.hpp"
 
 // =============================================
 // CONSTRUCTORS
@@ -66,7 +67,7 @@ void Individual::mutate(double probMutation) {
 // GETTERS
 // =============================================
 
-std::vector<double> Individual::decodeParameters() {
+std::vector<double> Individual::decodeParameters() const {
     std::vector<double> deco;
     size_t currentBit = 0;
 

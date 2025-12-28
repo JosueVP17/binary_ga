@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <vector>
-#include <stdexcept>
-#include "gaconfig.hpp"
 #include "individual.hpp"
+#include "gaconfig.hpp"
+
+class Fitness;
 
 /**
  * @class Population
@@ -39,6 +40,9 @@ class Population {
 
         // POPULATION CONFIGURATION
         size_t populationSize;                          /// Quantity of individuals in a population.
+
+        // FITNESS
+        Fitness* fitnessFunc;                           /// Fitness function provided by user.
 };
 
 #endif

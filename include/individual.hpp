@@ -6,7 +6,8 @@
 #include <vector>
 #include <random>
 #include <stdexcept>
-#include "gaconfig.hpp"
+
+class GAConfig;
 
 /**
  * @class Individual
@@ -49,7 +50,7 @@ class Individual {
          * @brief Decodes the binary string in real values from its parameter ranges.
          * @return A vector<double> with the values.
          */
-        std::vector<double> decodeParameters();
+        std::vector<double> decodeParameters() const;
 
         /**
          * @brief Gets the fitness value of the individual.
