@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "individual.hpp"
 #include "gaconfig.hpp"
 
@@ -26,7 +27,6 @@ class Population {
          */
         Population(const GAConfig& config);
 
-        // UTILS
         /**
          * @brief Prints the current generation.
          */
@@ -36,13 +36,19 @@ class Population {
         std::vector<Individual> individuals;            /// Vector of individuals from the population.
 
         // POPULATION INFORMATION
-        Individual bestIndividual;                      /// Stores the best individual of the population for elitism.
+        std::vector<Individual> bestIndividuals;        /// Stores the best individual of the population for elitism if activated.
 
         // POPULATION CONFIGURATION
+        size_t numElites;
         size_t populationSize;                          /// Quantity of individuals in a population.
 
         // FITNESS
         Fitness* fitnessFunc;                           /// Fitness function provided by user.
+        
+        /**
+         * @brief Gets the best N individuals from the population.
+         */
+        void selectElites();
 };
 
 #endif

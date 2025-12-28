@@ -9,6 +9,7 @@ GAConfig::Builder::Builder() {
     this->probMutation = 0.01;
     this->populationSize = 100;
     this->numGenerations = 200;
+    this->numElites = 1;
     this->fitnessFunc = nullptr;
 }
 
@@ -113,6 +114,19 @@ GAConfig::Builder& GAConfig::Builder::setNumGenerations(size_t number) {
     return *this;
 }
 
+GAConfig::Builder& GAConfig::Builder::setNumElites(size_t number) {
+    if(number <= 0) {
+        throw std::invalid_argument("Number of elites must be a value greater than zero.");
+    }
+
+    if(number > this->numGenerations) {
+        number = this->numGenerations;
+    }
+
+    this->numElites = number;
+    return *this;
+}
+
 GAConfig::Builder& GAConfig::Builder::setFitness(Fitness* function) {
     if(function == nullptr) {
         throw std::invalid_argument("Fitness function must be declared.");
@@ -137,6 +151,7 @@ GAConfig GAConfig::Builder::build() {
     config.probMutation = this->probMutation;
     config.populationSize = this->populationSize;
     config.numGenerations = this->numGenerations;
+    config.numElites = this->numElites;
     config.fitnessFunc = this->fitnessFunc;
 
     return config;
@@ -176,6 +191,10 @@ size_t GAConfig::getPopulationSize() const {
 
 size_t GAConfig::getNumGenerations() const {
     return this->numGenerations;
+}
+
+size_t GAConfig::getNumElites() const {
+    return this->numElites;
 }
 
 Fitness* GAConfig::getFitnessFunc() const {

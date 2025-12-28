@@ -25,6 +25,7 @@ class GAConfig {
         double getMutationRate() const;
         size_t getPopulationSize() const;
         size_t getNumGenerations() const;
+        size_t getNumElites() const;
         Fitness* getFitnessFunc() const;
 
     private:
@@ -39,6 +40,9 @@ class GAConfig {
         // POPULATION
         size_t populationSize;                                      /// Quantity of individuals in a population.
         size_t numGenerations;                                      /// Number of generations of the algorithm.
+        size_t numElites;                                           /// Number of individuals with elitisim.
+        
+        // FITNESS
         Fitness* fitnessFunc;                                       /// Builder: Fitness function provided by user.
 };
 
@@ -54,6 +58,7 @@ class GAConfig::Builder {
          * @param probMutation 0.01
          * @param populationSize 100
          * @param numGenerations 200
+         * @param numElites 1
          * @param fitnessFunc nullptr
          */
         Builder();
@@ -100,6 +105,11 @@ class GAConfig::Builder {
         Builder& setNumGenerations(size_t number);
 
         /**
+         * @brief Sets the number of individuals with elitism.
+         */
+        Builder& setNumElites(size_t number);
+
+        /**
          * @brief Sets the fitness function provided by user.
          */
         Builder& setFitness(Fitness* function);
@@ -121,6 +131,7 @@ class GAConfig::Builder {
         // POPULATION
         size_t populationSize;                                      /// Builder: Quantity of individuals in a population.
         size_t numGenerations;                                      /// Builder: Number of generations of the algorithm.
+        size_t numElites;                                           /// Builder: Number of individuals with elitisim.
 
         // FITNESS
         Fitness* fitnessFunc;                                       /// Builder: Fitness function provided by user.

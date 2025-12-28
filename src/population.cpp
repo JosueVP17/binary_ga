@@ -13,6 +13,7 @@ Population::Population() {
 Population::Population(const GAConfig& config) {
     this->populationSize = config.getPopulationSize();
     this->fitnessFunc = config.getFitnessFunc();
+    this->numElites = config.getNumElites();
 
     this->individuals.resize(this->populationSize);
 
@@ -21,17 +22,32 @@ Population::Population(const GAConfig& config) {
     for(size_t i = 0; i < this->populationSize; i++) {
         this->individuals[i] = Individual(config);
         this->individuals[i].setFitness(this->fitnessFunc->evaluate(individuals[i]));
-
-        if(this->individuals[i].getFitness() > bestFit) {
-            this->bestIndividual = this->individuals[i];
-            bestFit = this->individuals[i].getFitness();
-        }
     }
+
+    selectElites();
 }
 
 // =============================================
 // UTILS
 // =============================================
+void Population::selectElites() {
+    std::vector<Individual> copy(individuals);
+
+    std::partial_sort(
+        copy.begin(),
+        copy.begin() + this->numElites,
+        copy.end(),
+        [](const Individual& a, const Individual& b) {
+            return a.getFitness() > b.getFitness();
+        }
+    );
+
+    this->bestIndividuals.insert(
+        bestIndividuals.end(),
+        copy.begin(),
+        copy.begin() + this->numElites
+    );
+}
 
 void Population::printPopulation() {
     std::vector<double> decoded;
@@ -51,9 +67,9 @@ void Population::printPopulation() {
         std::cout << "\t" << this->individuals[i].getFitness() << std::endl;
     }
 
-    std::cout << "Best individual: " << this->bestIndividual << std::endl;
-    std::cout << "Fitness: " << this->bestIndividual.getFitness() << std::endl;
-    decoded = bestIndividual.decodeParameters();
+    std::cout << "Best individual: " << this->bestIndividuals[0] << std::endl;
+    std::cout << "Fitness: " << this->bestIndividuals[0].getFitness() << std::endl;
+    decoded = bestIndividuals[0].decodeParameters();
     std::cout << "Parameters:" << std::endl;
     for(size_t p = 0; p < decoded.size(); p++) {
         std::cout << "P" << p << " = " << decoded[p] << std::endl;
