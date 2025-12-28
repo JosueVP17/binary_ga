@@ -17,15 +17,15 @@ class GAConfig {
 
         // GETTERS
         
-        size_t getGeneLength();
-        size_t getNumParameters();
-        std::vector<size_t> getParameterLengths();
-        std::vector<std::pair<double, double>> getParameterRanges();
-        double getCrossoverRate();
-        double getMutationRate();
-        size_t getPopulationSize();
-        size_t getNumGenerations();
-        Fitness* getFitnessFunc();
+        size_t getGeneLength() const;
+        size_t getNumParameters() const;
+        std::vector<size_t> getParameterLengths() const;
+        std::vector<std::pair<double, double>> getParameterRanges() const;
+        double getCrossoverRate() const;
+        double getMutationRate() const;
+        size_t getPopulationSize() const;
+        size_t getNumGenerations() const;
+        Fitness* getFitnessFunc() const;
 
     private:
         // INDIVIDUAL

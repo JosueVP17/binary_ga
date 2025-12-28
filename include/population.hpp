@@ -24,7 +24,7 @@ class Population {
          * @brief Constructor that generates a new population.
          * @param config Configuration variable from GAConfig class.
          */
-        Population(GAConfig& config);
+        Population(const GAConfig& config);
 
         // UTILS
         /**

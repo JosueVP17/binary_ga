@@ -10,7 +10,7 @@ Population::Population() {
     this->populationSize = 0;
 }
 
-Population::Population(GAConfig& config) {
+Population::Population(const GAConfig& config) {
     this->populationSize = config.getPopulationSize();
     this->fitnessFunc = config.getFitnessFunc();
 

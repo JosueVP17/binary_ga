@@ -11,7 +11,7 @@ Individual::Individual() {
     this->n_parameters = 0;
 }
 
-Individual::Individual(GAConfig& config){
+Individual::Individual(const GAConfig& config){
     this->geneLength = config.getGeneLength();
     this->n_parameters = config.getNumParameters();
     this->parameterLengths = config.getParameterLengths();

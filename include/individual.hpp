@@ -28,7 +28,7 @@ class Individual {
          * @param parameterLengths Vector with the length in bits for each parameter.
          * @param parameterRanges Vector with the ranges [min, max] for each parameter.
          */
-        Individual(GAConfig& config);
+        Individual(const GAConfig& config);
 
         // GENETIC MANIPULATION
         /**

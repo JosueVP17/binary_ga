@@ -146,38 +146,38 @@ GAConfig GAConfig::Builder::build() {
 // GETTERS
 // =============================================
 
-size_t GAConfig::getGeneLength() {
+size_t GAConfig::getGeneLength() const {
     return this->geneLength;
 }
 
-size_t GAConfig::getNumParameters() {
+size_t GAConfig::getNumParameters() const {
     return this->n_parameters;
 }
 
-std::vector<size_t> GAConfig::getParameterLengths() {
+std::vector<size_t> GAConfig::getParameterLengths() const {
     return this->parameterLengths;
 }
 
-std::vector<std::pair<double, double>> GAConfig::getParameterRanges() {
+std::vector<std::pair<double, double>> GAConfig::getParameterRanges() const {
     return this->parameterRanges;
 }
 
-double GAConfig::getCrossoverRate() {
+double GAConfig::getCrossoverRate() const {
     return this->probCross;
 }
 
-double GAConfig::getMutationRate() {
+double GAConfig::getMutationRate() const {
     return this->probMutation;
 }
 
-size_t GAConfig::getPopulationSize() {
+size_t GAConfig::getPopulationSize() const {
     return this->populationSize;
 }
 
-size_t GAConfig::getNumGenerations() {
+size_t GAConfig::getNumGenerations() const {
     return this->numGenerations;
 }
 
-Fitness* GAConfig::getFitnessFunc() {
+Fitness* GAConfig::getFitnessFunc() const {
     return this->fitnessFunc;
 }
