@@ -9,6 +9,7 @@ GAConfig::Builder::Builder() {
     this->probMutation = 0.01;
     this->populationSize = 100;
     this->numGenerations = 200;
+    this->fitnessFunc = nullptr;
 }
 
 GAConfig::Builder& GAConfig::Builder::setGeneLength(size_t length) {
@@ -122,6 +123,10 @@ GAConfig::Builder& GAConfig::Builder::setFitness(Fitness* function) {
 }
 
 GAConfig GAConfig::Builder::build() {
+    if(this->fitnessFunc == nullptr) {
+        throw std::invalid_argument("Fitness function must be declared before build.");
+    }
+
     GAConfig config;
 
     config.geneLength = this->geneLength;

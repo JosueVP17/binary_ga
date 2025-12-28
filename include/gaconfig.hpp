@@ -54,6 +54,7 @@ class GAConfig::Builder {
          * @param probMutation 0.01
          * @param populationSize 100
          * @param numGenerations 200
+         * @param fitnessFunc nullptr
          */
         Builder();
 
